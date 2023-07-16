@@ -56,13 +56,16 @@ Subprogramda ise VSAM dosyasını tanımlayarak,dosyada olması gereken,
     -String ve 
     -Evaluate komutlarını yine Subprogramda gerekli yerlerde kullandım.
 
-      <SET IDX-SUCCES TO TRUE
-         INSPECT IDX-SRNAME REPLACING
+      <SET IDX-SUCCES TO TRUE>
+      
+         <INSPECT IDX-SRNAME REPLACING
            ALL 'E' BY 'I',
-           'A' BY 'E'.
-         STRING 'UPDATE FILE SUCCESSFUL, RC:' IDX-ST ' '
-               DELIMITED BY SIZE INTO SUB-OUT-EXPLANATION
-          EVALUATE TRUE
+           'A' BY 'E'.>
+           
+         <STRING 'UPDATE FILE SUCCESSFUL, RC:' IDX-ST ' '
+               DELIMITED BY SIZE INTO SUB-OUT-EXPLANATION>
+               
+          <EVALUATE TRUE
               WHEN WS-PROCESS-TYPE = '1'
                 PERFORM H300-READ
               WHEN WS-PROCESS-TYPE = '2'
