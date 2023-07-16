@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. PJMAIN01.
+       AUTHOR. AHMET MELIH CALMAZ.
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
@@ -7,6 +8,7 @@
                              STATUS INP-ST.
            SELECT OUT-FILE   ASSIGN TO OUTFILE
                              STATUS OUT-ST.
+
        DATA DIVISION.
        FILE SECTION.
        FD  OUT-FILE RECORDING MODE F.
@@ -23,6 +25,7 @@
            03 INP-PROCESS-TYPE  PIC 9(01).
            03 INP-ID            PIC 9(5).
            03 INP-CRN           PIC 9(3).
+
        WORKING-STORAGE SECTION.
          01  WS-WORK-AREA.
            05 WS-SUBPROG        PIC X(08)  VALUE 'PJSUB001'.
@@ -51,6 +54,7 @@
            PERFORM H999-PROGRAM-EXIT.
            STOP RUN.
        0000-END. EXIT.
+
        H100-OPEN-FILES.
            OPEN INPUT  INP-FILE.
            OPEN OUTPUT OUT-FILE.
@@ -59,11 +63,13 @@
            MOVE INP-ST TO RETURN-CODE
            PERFORM H999-PROGRAM-EXIT
            END-IF.
+           SET INP-SUCCES TO TRUE
            IF (OUT-ST NOT = 0) AND (OUT-ST NOT = 97)
            DISPLAY 'UNABLE TO OPEN OUTFILE: ' OUT-ST
            MOVE OUT-ST TO RETURN-CODE
            PERFORM H999-PROGRAM-EXIT
            END-IF.
+           SET OUT-SUCCESS TO TRUE
            READ INP-FILE.
        H100-END. EXIT.
 
