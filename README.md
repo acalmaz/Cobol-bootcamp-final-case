@@ -1,18 +1,19 @@
 # Cobol-bootcamp-final-case
-Patika, AKBANK COBOL Bootcamp Bitirme Projesi
+Patika, AKBANK COBOL Bootcamp Bitirme Projesi,
 Projeyi yapmaya main programdan başladım. USING komutunu ekleyerek gerekli veri aktarımını yapıp bir subprogram çağırdım. 
 
-  '''  H200-PROCCES.
+    <H200-PROCCES.
            PERFORM H300-INP-SUB
            CALL WS-SUBPROG USING WS-SUB-AREA
            PERFORM H400-OUT-SUB
            READ INP-FILE.
-       H200-END. EXIT.                '''
+       H200-END. EXIT.>                
 
 Main program yalnızca dosya işlemlerini gerçekleştirdiğimiz alan olduğu için input ve output dosya verilerini burada işleme soktum. 
 
-FILE SECTION.
-'''    FD  OUT-FILE RECORDING MODE F.
+
+    <FILE SECTION.
+       FD  OUT-FILE RECORDING MODE F.
          01  OUT-REC.
            05 OUT-PROCESS-TYPE  PIC 9(01).
            05 OUT-ID            PIC 9(05).
@@ -25,7 +26,7 @@ FILE SECTION.
          01  INP-REC.
            03 INP-PROCESS-TYPE  PIC 9(01).
            03 INP-ID            PIC 9(5).
-           03 INP-CRN           PIC 9(3).             '''
+           03 INP-CRN           PIC 9(3). >
 
 Subprogramda ise VSAM dosyasını tanımlayarak,dosyada olması gereken,
   -READ,
@@ -33,7 +34,7 @@ Subprogramda ise VSAM dosyasını tanımlayarak,dosyada olması gereken,
   -DELETE ve
   -UPDATE işlemleri için fonksiyonlar yazdım ve tüm processleri burada gerçekleştirdim.
 
-'''    H220-VALID-KEY.
+      <H220-VALID-KEY.
            MOVE SUB-INP-PROCESS-TYPE TO WS-PROCESS-TYPE
            EVALUATE TRUE
               WHEN WS-PROCESS-TYPE = '1'
@@ -47,7 +48,7 @@ Subprogramda ise VSAM dosyasını tanımlayarak,dosyada olması gereken,
               WHEN OTHER
               DISPLAY 'WRONG PROCESS TYPE'
            END-EVALUATE.
-       H220-END. EXIT.          '''
+       H220-END. EXIT.>          
 
   Kullanmamız gereken,
     -Set, 
@@ -55,7 +56,7 @@ Subprogramda ise VSAM dosyasını tanımlayarak,dosyada olması gereken,
     -String ve 
     -Evaluate komutlarını yine Subprogramda gerekli yerlerde kullandım.
 
-  '''    SET IDX-SUCCES TO TRUE
+      <SET IDX-SUCCES TO TRUE
          INSPECT IDX-SRNAME REPLACING
            ALL 'E' BY 'I',
            'A' BY 'E'.
@@ -72,8 +73,7 @@ Subprogramda ise VSAM dosyasını tanımlayarak,dosyada olması gereken,
                 PERFORM H600-UPDATE
               WHEN OTHER
               DISPLAY 'WRONG PROCESS TYPE'
-           END-EVALUATE.
-  '''
+           END-EVALUATE.>
 
   JCL dosyalarında ödev 3 de olduğu gibi kullanılacak input dosyaları için 3 jcl çalıştırdım. İnputları aldıktan sonra CBL dosyalarının 
     çalışması için yazdığım JCL'de önce subprogramı derledim ardından main programı derledim ve main dosyasını çalıştırdım.
